@@ -1,11 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import { browserHistory, Router, Route, IndexRoute } from 'react-router'
+import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import { Provider } from 'react-redux'
 import uuid from 'node-uuid'
 import './stylesheets/main.scss'
 
-import App from './Home/App'
+import App from './App/index'
+import Users from './App/components/Users/index'
+// import UserEdit from './pages/UserEdit'
+import NotFound from './App/notFound'
 import { reducers } from './Home/reducers'
 
 // import 'react-lumberjack'
@@ -27,14 +32,24 @@ const initial_state = {
 }
 
 //create store
+// let middleware = applyMiddleware(routerMiddleware(browserHistory))
 const store = createStore(reducers,
   initial_state,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  // middleware
 )
+// const history = syncHistoryWithStore(browserHistory, store)
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
+    {/* <Router history={history}>
+      <Route path="/" component={App}>
+        <IndexRoute component={Users} />
+        <Route path="user/:id" component={UserEdit} />
+        <Route path="*" component={NotFound} />
+      </Route>
+    </Router> */}
   </Provider>, 
   document.getElementById('app')
 )
