@@ -5,8 +5,8 @@ import { Provider } from 'react-redux'
 import uuid from 'node-uuid'
 import './stylesheets/main.scss'
 
-import App from './components/App'
-import { reducers } from './reducers/index'
+import App from './Home/App'
+import { reducers } from './Home/reducers'
 
 // import 'react-lumberjack'
 

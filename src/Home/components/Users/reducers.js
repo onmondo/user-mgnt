@@ -24,7 +24,7 @@ export default function users(state = {}, action) {
       newState = JSON.parse(JSON.stringify(state))
 
       newState = {
-        list: new_state.list.filter((user) => {
+        list: newState.list.filter((user) => {
           return user.id !== action.id
         }),
         modal: {

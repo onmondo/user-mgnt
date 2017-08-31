@@ -2,17 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Table } from 'react-bootstrap'
 
-import User from './User'
-import UserDeleteModal from './UserDeleteModal'
+import User from './User/index'
+import Modal from './deleteModal'
 
 class Users extends React.Component {
   
-  constructor(props) {
-    super(props)
-
-    // this.modalDeleteShow = this.modalDeleteShow.bind(this)
-  }
-
   render() {
     return(
       <div>
@@ -35,22 +29,10 @@ class Users extends React.Component {
         })}
       </tbody>
     </Table>
-    <UserDeleteModal />
+    <Modal />
     </div>
     )
   }
-
-  // modalDeleteShow(event) {
-  //   const user_id = Number(event.target.dataset.id)
-  //   const username = event.target.dataset.username
-  //   if (user_id || username) {
-  //     this.props.dispatch({
-  //       type: 'users.modalDeleteShow',
-  //       id: user_id,
-  //       username
-  //     })
-  //   }
-  // }  
 }
 
 // export the connected class

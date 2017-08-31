@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Modal, Button } from 'react-bootstrap'
 
-class UserDeleteModal extends React.Component {
+class DeleteModal extends React.Component {
 
   constructor(props) {
     super(props)
@@ -67,4 +67,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(UserDeleteModal)
+export default connect(mapStateToProps)(DeleteModal)
