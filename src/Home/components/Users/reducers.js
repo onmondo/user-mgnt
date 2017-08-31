@@ -1,44 +1,42 @@
+import { reducerCall } from '../../reducers'
 export default function users(state = {}, action) {
-  let newState
-  switch(action.type) {
-    case 'users.modalDeleteShow':
-      newState = JSON.parse(JSON.stringify(state))
-      newState.modal = newState.modal ? newState.modal : {}
-      newState.modal.list_delete = {
-        show: true,
-        id: action.id,
-        username: action.username
-      }
-      return newState
+  return reducerCall(state, action, UserReducer)
+}
 
-    case 'users.modalDeleteHide':
-      newState = JSON.parse(JSON.stringify(state))
-      newState.modal.list_delete = {
-        show: false,
-        id: 0,
-        username: ''
-      }
-      return newState
+class UserReducer {
+  static modalDeleteShow(newState, action) {
+    newState.modal = newState.modal ? newState.modal : {}
+    newState.modal.list_delete = {
+      show: true,
+      id: action.id,
+      username: action.username
+    }
+    return newState    
+  }
 
-    case 'users.delete':
-      newState = JSON.parse(JSON.stringify(state))
+  static modalDeleteHide(newState, action) {
+    newState.modal.list_delete = {
+      show: false,
+      id: 0,
+      username: ''
+    }
+    return newState
+  }
 
-      newState = {
-        list: newState.list.filter((user) => {
-          return user.id !== action.id
-        }),
-        modal: {
-          list_delete: {
-            show: false,
-            id: 0,
-            username: ''
-          }
+  static delete(newState, action) {
+    newState = {
+      list: newState.list.filter((user) => {
+        return user.id !== action.id
+      }),
+      modal: {
+        list_delete: {
+          show: false,
+          id: 0,
+          username: ''
         }
       }
+    }
 
-      return newState
-      
-    default:
-      return state
+    return newState    
   }
 }
